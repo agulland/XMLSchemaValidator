@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+  targetNamespace="http://www.gulland.com/software/srdg/1.0/ofd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns="http://www.gulland.com/software/srdg/1.0/ofd">
+
+	<!-- named types -->
+	<xsd:simpleType name="non-empty-string">
+		<xsd:annotation>
+			<xsd:documentation>Defines that the string value can not be null
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:minLength value='1' />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="fileType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Delimited"></xsd:enumeration>
+			<xsd:enumeration value="FixedWidth"></xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+
+	<!--  attributes  -->
+	<xsd:attribute name="fieldname" type="non-empty-string" />
+	<xsd:attribute name="param-format" type="non-empty-string" />
+
+	<!--  simple elements -->
+	<xsd:element name="path" type="non-empty-string" />
+	<xsd:element name="rows" type="xsd:int" />
+	<xsd:element name="type" type="fileType" />
+	<xsd:element name="headers" type="xsd:boolean" />
+	<xsd:element name="delimiter" type="xsd:string" />
+	<xsd:element name="quote-fields" type="xsd:boolean" />
+	<xsd:element name="name" type="non-empty-string" />
+	<xsd:element name="format" type="xsd:string" />
+	<xsd:element name="width" type="xsd:int" />
+
+
+	<!--  complex types -->
+  <xsd:complexType name="value" mixed="true">
+    <xsd:simpleContent>
+      <xsd:extension base="non-empty-string">
+        <xsd:attribute ref="param-format" use="optional"/>
+      </xsd:extension>
+    </xsd:simpleContent>
+  </xsd:complexType>
+
+	<xsd:complexType name="parameterType">
+	  <xsd:sequence>
+	   <xsd:element ref="name"/>
+	   <xsd:element name="value" type="value"/>
+	  </xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="fieldType">
+		<xsd:sequence>
+			<xsd:element name="parameter" type="parameterType" minOccurs="1" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute ref="fieldname" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="columnType">
+		<xsd:sequence>
+			<xsd:element ref="name" minOccurs="1" maxOccurs="1" />
+			<xsd:element ref="format" minOccurs="0" maxOccurs="1" />
+			<xsd:element ref="width" minOccurs="0" maxOccurs="1" />
+			<xsd:element name="field" type="fieldType" minOccurs="1"
+				maxOccurs="1" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="file">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="path" minOccurs="1" maxOccurs="1" />
+				<xsd:element ref="rows" minOccurs="1" maxOccurs="1" />
+				<xsd:element ref="type" minOccurs="1" maxOccurs="1" />
+				<xsd:element ref="delimiter" />
+				<xsd:element ref="headers" />
+				<xsd:element ref="quote-fields" />
+				<xsd:element name="column" type="columnType" minOccurs="1"
+					maxOccurs="unbounded" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>  

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema 
+  targetNamespace="http://www.gulland.com/software/srdg/1.0/fields"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+	xmlns="http://www.gulland.com/software/srdg/1.0/fields">
+
+	<!-- named types -->
+	<xsd:simpleType name="non-empty-string">
+        <xsd:annotation>
+        	<xsd:documentation>Defines that the string value can not be null</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+			<xsd:minLength value='1' />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="stringDatatype">
+        <xsd:annotation>
+        	<xsd:documentation>Defines the set of available types for the method of the parameter</xsd:documentation>
+        </xsd:annotation>
+        <xsd:restriction base="xsd:string">
+		  <xsd:enumeration value="String" />
+		  <xsd:enumeration value="Integer" />
+		  <xsd:enumeration value="Double" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!--  simple elements -->
+	<xsd:element name="name" type="non-empty-string" >
+		<xsd:annotation>
+			<xsd:documentation>A unique name for the field. It is this name that the OFD file must use when referencing a data generator field</xsd:documentation>
+		</xsd:annotation></xsd:element>
+	<xsd:element name="description" type="xsd:string" >
+		<xsd:annotation>
+			<xsd:documentation>A business description of the data generator field</xsd:documentation>
+		</xsd:annotation></xsd:element>
+
+	<!--  attributes -->
+	<xsd:attribute name="classname" type="non-empty-string" >
+		<xsd:annotation>
+			<xsd:documentation>This is the fully qualified class name that the field entry represents</xsd:documentation>
+		</xsd:annotation></xsd:attribute>  
+  <xsd:attribute name="parameterName" type="non-empty-string" >
+  	<xsd:annotation>
+  		<xsd:documentation>The name of the parameter</xsd:documentation>
+  	</xsd:annotation></xsd:attribute>
+	<xsd:attribute name="datatype" type="stringDatatype" >
+		<xsd:annotation>
+			<xsd:documentation>The datatype for the parameter</xsd:documentation>
+		</xsd:annotation></xsd:attribute>	
+
+	<!--  complex types -->
+	<xsd:complexType name="parameterType">
+        <xsd:annotation>
+        	<xsd:documentation>Defines a parameter for a field</xsd:documentation>
+        </xsd:annotation>
+        <xsd:attribute ref="parameterName" use="required"/>
+		<xsd:attribute ref="datatype" use="required"/>
+	</xsd:complexType>
+
+
+	<!-- Elements -->
+	<xsd:element name="field">
+        <xsd:annotation>
+        	<xsd:documentation>Defines an available data generator field</xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="name" minOccurs="1" maxOccurs="1" />
+				<xsd:element ref="description" minOccurs="0" maxOccurs="1" />
+				<xsd:element name="parameter" type="parameterType"
+					minOccurs="1" maxOccurs="unbounded" />
+			</xsd:sequence>
+			<xsd:attribute ref="classname" use="required" />
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="fields">
+		<xsd:complexType>		
+			<xsd:sequence>
+				<xsd:element ref="field" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

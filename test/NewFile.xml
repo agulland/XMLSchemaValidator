@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:fields xmlns:p="http://www.gulland.com/software/srdg/1.0/fields" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gulland.com/software/srdg/1.0/fields fields.xsd ">
+  <p:field p:classname="xxx">
+    <p:name>p:name</p:name>
+    <parameter p:datatype="Byte">parameter</parameter>
+  </p:field>
+</p:fields>

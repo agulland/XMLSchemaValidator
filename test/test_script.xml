@@ -1,0 +1,16 @@
+<file>
+  <path>path</path>
+  <rows>100</rows>
+  <type>Delimited</type>
+  <headers>Yes</headers>
+  <delimiter>,</delimiter>
+  <quote-fields>Yes</quote-fields>
+  <column>
+    <name>key</name>
+    <format>0</format>
+    <width>20</width>
+    <field name="Sequential Number">
+      <parameter name="Start" value="20"></parameter>
+    </field>
+  </column>
+</file>

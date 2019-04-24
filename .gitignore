@@ -1,0 +1,5 @@
+# we don't need bin folder
+/bin/
+/.metadata/
+/.settings/
+

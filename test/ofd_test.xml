@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ofd:file 
+  xmlns:ofd="http://www.gulland.com/software/srdg/1.0/ofd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.gulland.com/software/srdg/1.0/ofd ofd.xsd ">
+  
+  <ofd:path>C:\temp</ofd:path>
+  <ofd:rows>100</ofd:rows>
+  <ofd:type>Delimited</ofd:type>
+  <ofd:delimiter>,</ofd:delimiter>
+  <ofd:headers>true</ofd:headers>
+  <ofd:quote-fields>true</ofd:quote-fields>
+  <column>
+    <ofd:name>pk</ofd:name>
+    <ofd:format>0</ofd:format>
+    <ofd:width>20</ofd:width>
+    <field ofd:fieldname="Sequential Number">
+      <parameter>
+	      <ofd:name>start</ofd:name>
+	      <value>10</value>
+      </parameter>
+      <parameter>
+        <ofd:name>end</ofd:name>
+        <value>100</value>
+      </parameter>      
+    </field>  
+  </column>
+  
+  <column>
+  	<ofd:name>Quantity</ofd:name>
+  	<field ofd:fieldname="Random Number">
+      <parameter>
+        <ofd:name>start</ofd:name>
+        <value>100</value>
+      </parameter>
+      <parameter>
+        <ofd:name>end</ofd:name>
+        <value>500</value>
+      </parameter>      
+  	</field>
+  </column>
+  
+  <column>
+    <ofd:name>Purchase Date</ofd:name>
+    <field ofd:fieldname="Random Date">
+      <parameter>
+        <ofd:name>startDate</ofd:name>
+        <value ofd:param-format="dd Mmm yyyy">27 Jan 1973</value>
+      </parameter>
+      <parameter>
+        <ofd:name>endDate</ofd:name>
+        <value ofd:param-format="dd Mmm yyyy">
+        	27 Jan 2010
+        </value>
+      </parameter>      
+    </field>
+  </column>
+     
+  
+</ofd:file>
